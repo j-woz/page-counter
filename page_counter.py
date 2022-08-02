@@ -45,5 +45,6 @@ def main():
         ipage = int(page) + (random.random() < page - int(page))
         print("%4i" % ipage)
 
+
 if __name__ == "__main__":
     main()
