@@ -11,7 +11,10 @@ def parse_args():
                         type=int)
     parser.add_argument("current", help="Current page",
                         type=int)
-    parser.add_argument("start", nargs='?', default=dt.datetime.now(),
+    parser.add_argument("start", nargs='?',
+                        default=dt.datetime.now()
+                          .replace(hour=0, minute=0,
+                                   second=0, microsecond=0),
                         type=lambda s: dt.datetime.strptime(s, '%Y-%m-%d'),
                         help="Date to start.  Default: today")
     args = parser.parse_args()
@@ -36,12 +39,12 @@ def main():
     print("")
 
     import random
-    limit = 5
+    limit = min(5, span.days)
     for i in range(0, limit):
         td = dt.timedelta(days=i)
         day = args.start + td
         print(day.strftime("%Y-%m-%d "), end='')
-        page = args.current + rate * i
+        page = args.current + rate * (i + 1)
         ipage = int(page) + (random.random() < page - int(page))
         print("%4i" % ipage)
 
