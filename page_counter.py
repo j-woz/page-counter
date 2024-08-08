@@ -30,12 +30,12 @@ def main():
     args = parse_args()
     span = args.deadline - args.start
     if span.days < 0: abort("time span is negative!")
-    print("days to go: %3i" % span.days)
+    print("days to go: %4i" % span.days)
     pages = args.total - args.current
     if pages < 0: abort("pages remaining is negative!")
-    print("pages left: %3i" % pages)
+    print("pages left: %4i" % pages)
     rate = pages / span.days
-    print("pages/day:  %5.1f" % rate)
+    print("pages/day:  %6.1f" % rate)
     print("")
 
     import random
@@ -43,7 +43,7 @@ def main():
     for i in range(0, limit):
         td = dt.timedelta(days=i)
         day = args.start + td
-        print(day.strftime("%Y-%m-%d "), end='')
+        print(day.strftime(" %Y-%m-%d "), end='')
         page = args.current + rate * (i + 1)
         ipage = int(page) + (random.random() < page - int(page))
         print("%4i" % ipage)
